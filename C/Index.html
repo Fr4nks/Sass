@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html scrolltop="NaN" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+
+<title>jQuery Patch: Animate CSS Rotation and Scale - zachstronaut</title>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.transit.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+
+
+</head>
+
+<style type="text/css" media="screen">
+body{ background:#000000}
+.at_ex{ width: 601px; height: 601px;margin-right: 24px; margin-bottom: 0; position:absolute; background:url(background.png);
+ }
+#second {  width: 597px; height: 597px; position: relative;  }
+.single { background: cyan;}
+.field { width: 38px; height: 38px; position: absolute}
+
+#wrapper{ 
+
+
+}
+
+
+#container { position:absolute;
+
+		}
+
+#container div{ width:560px; height:560px;
+top:0;
+left:0;
+position:absolute;
+background-repeat:no-repeat; 
+     -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -khtml-border-radius: 100%;
+    border-radius: 100%;
+	display:none }
+
+#container #countries1{ background:url(images/question1.jpg)}
+#container #countries2{ background:url(images/question2.jpg)}
+#countries3{ background:url(images/question3.jpg)}
+#countries4{ background:url(images/question4.jpg)}
+#countries5{ background:url(images/question5.jpg)}
+#countries6{ background:url(images/question6.jpg)}
+#countries7{ background:url(images/question7.jpg)}
+#countries8{ background:url(images/question8.jpg)}
+#countries9{ background:url(images/question9.jpg)}
+#countries10{ background:url(images/questio10.jpg)}
+#container #countries11{ background:url(images/question11.jpg)}
+#container #countries12{ background:url(images/question12.jpg)}
+
+
+.question{ 	color:#FFF}
+#answer{ width:200px; height:50px}
+
+</style>
+<div id="container"></div>
+<div id="wrapper"><div id="second"><div id="at_ex1" class="at_ex"></div></div></div>
+
+
+
+<script type="text/javascript">
+
+wheeldiv = $('#at_ex1');
+amountsectors = 12;
+duration = 6000;
+revolutions = 1;
+easing = 'easeOutQuart';
+i = 0;
+
+var randomnumber = (Math.floor(Math.random() * amountsectors)) + 1;
+var slidelength = amountsectors + randomnumber;
+var randomsector = (1 / amountsectors) * randomnumber;
+var fadetime = duration / slidelength;
+var randomdegree = (randomsector + revolutions) * 360;
+var k = 0;
+var y = 0;
+var z = 0;
+
+
+
+
+
+wheeldiv.mouseup(function () {
+    wheeldiv.transition({
+        rotate: randomdegree
+    }, duration, easing, function () {
+        alert(randomnumber);
+    });
+    
+
+
+
+function animation_loop() {				
+if (k < (amountsectors-1))
+  {
+            var y = k;
+            k++;
+
+  }
+else
+  {
+ 	k = randomnumber;  
+	$('#countries' + amountsectors).fadeOut()}
+
+        $('#countries' + k).fadeIn((fadetime), function () {
+            $('#countries' + y).css("display", "none"); animation_loop();
+        });		
+		console.log(k);						
+	}
+
+	animation_loop();
+	
+	
+	
+function shuffle(array) {
+  var currentIndex = array.length
+    , temporaryValue
+    , randomIndex
+    ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+var arr = [1, 2, 3, 4, 5, 6];
+shuffle(arr);
+console.log(arr);
+
+for (i = 1; i <= 5; i++) {
+    $('#container').append("<div id='countries" + i + "'><img src='image/question" + arr[i] + ".jpg'/></div>");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+});
+</script>
+</body></html>
+
